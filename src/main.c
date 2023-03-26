@@ -8,6 +8,7 @@ char board[3][3];
 const char PLAYER = 'X';
 const char COMPUTER = 'O';
 
+void startGame();
 void resetBoard();
 void printBoard();
 int checkFreeSpaces();
@@ -18,13 +19,31 @@ void printWinner(char);
 
 int main()
 {
+    char response[3];
+    do
+    {
+        system("clear");
+        startGame();
+        printf("Would you like to play again? (Y/N): ");
+        scanf("%s", response);
+    } while (response[0] == 'Y' || response[0] == 'y');
+    printf("\n");
+    printf("Thanks for playing :) \n");
+    return 0;
+}
+
+void startGame()
+{
     char winner = ' ';
     bool no_free_space = checkFreeSpaces() != 0;
 
     resetBoard();
 
+    system("clear");
     while (winner == ' ' && checkFreeSpaces() != 0)
     {
+        printf("TIC-TAC-TOE\n");
+        printf("-----------\n");
         printBoard();
 
         playerMove();
@@ -44,10 +63,11 @@ int main()
         }
     }
 
+    system("clear");
+    printf("TIC-TAC-TOE\n");
+    printf("-----------\n");
     printBoard();
     printWinner(winner);
-
-    return 0;
 }
 
 void resetBoard()
@@ -171,6 +191,7 @@ char checkWinner()
 
 void printWinner(char winner)
 {
+    printf("-----------\n");
     if (winner == PLAYER)
     {
         printf("YOU WIN!");
@@ -184,5 +205,5 @@ void printWinner(char winner)
         printf("DRAW");
     }
 
-    printf("\n");
+    printf("\n-----------\n");
 }
